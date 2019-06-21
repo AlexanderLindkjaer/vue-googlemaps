@@ -64,7 +64,6 @@ export default {
 
 			this.$_geocoder.geocode({address: this.address}, (results, status) => {
 				if (status === 'OK') {
-
 					this.$_geo_address = results[0].geometry.location
 
 					this.$_panorama.setPosition(this.$_geo_address)
@@ -78,11 +77,9 @@ export default {
 					setTimeout(() => {
 						const status = this.$_panorama.getStatus()
 
-						if(status != 'OK'){
+						if (status != 'OK') {
 							this.$emit('notAvailable')
 						}
-
-
 					}, 1000)
 				} else {
 					console.log(status)
