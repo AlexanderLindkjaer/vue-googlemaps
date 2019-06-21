@@ -30,7 +30,7 @@
         >
 
                 <template>
-                    <googlemaps-streetview-render :address="address"></googlemaps-streetview-render>
+                    <googlemaps-streetview-render :address="address" v-on:notAvailable="streetViewNotAvailable"></googlemaps-streetview-render>
                 </template>
 
         </googlemaps-map>
@@ -51,7 +51,7 @@
     			userPosition: null,
     			zoom: 12,
     			streetViewRequest: null,
-    			address: 'Dronning Louises Bro, 1371 København',
+    			address: 'Baldersgade 6, 2200 København',
     		}
     	},
 
@@ -96,7 +96,12 @@
     		},
 
     		mapClick () {
+    		    this.address = 'Hans Olsensvej 4 B, 2670 Grevej'
     		},
+
+            streetViewNotAvailable() {
+
+            }
     	},
     }
 </script>

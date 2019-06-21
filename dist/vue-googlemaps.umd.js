@@ -2874,7 +2874,8 @@ var StreetViewRender = {
 			}
 
 			this.$_geocoder.geocode({ address: this.address }, function (results, status) {
-				if (status == 'OK') {
+				if (status === 'OK') {
+
 					_this.$_geo_address = results[0].geometry.location;
 
 					_this.$_panorama.setPosition(_this.$_geo_address);
@@ -2884,6 +2885,16 @@ var StreetViewRender = {
 						pitch: 0
 					});
 					_this.$_panorama.setVisible(true);
+
+					setTimeout(function () {
+						var status = _this.$_panorama.getStatus();
+
+						if (status != 'OK') {
+							_this.$emit('notAvailable');
+						}
+					}, 1000);
+				} else {
+					console.log(status);
 				}
 			});
 		}
