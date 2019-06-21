@@ -37,7 +37,7 @@
             >
 
                 <template slot-scope="props" v-if="props.results">
-                    <googlemaps-direction-draw :directionResult="props.results"></googlemaps-direction-draw>
+                    <googlemaps-direction-draw :directionResult="props.results" iconColor="#00a65e"></googlemaps-direction-draw>
                 </template>
 
             </googlemaps-direction>
