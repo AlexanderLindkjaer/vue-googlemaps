@@ -1619,6 +1619,37 @@ var Geocoder = {
 	}
 };
 
+var GeocoderEvent = {
+	name: 'GoogleMapsGeocoder',
+
+	mixins: [Service],
+
+	props: {
+		disablePlaceDetails: {
+			type: Boolean,
+			default: false
+		}
+	},
+
+	methods: {
+		createServices: function createServices() {
+			this.$_geocoder = new window.google.maps.Geocoder();
+		},
+		update: function update() {
+			var _this = this;
+
+			if (this.googleMapsReady) {
+				this.loading = true;
+				this.$_geocoder.geocode(this.request, function (results, status) {
+					_this.$emit('geocode', results);
+					_this.setResults(results, status);
+					_this.loading = false;
+				});
+			}
+		}
+	}
+};
+
 function getInternetExplorerVersion() {
 	var ua = window.navigator.userAgent;
 
@@ -2875,7 +2906,6 @@ var StreetViewRender = {
 
 			this.$_geocoder.geocode({ address: this.address }, function (results, status) {
 				if (status === 'OK') {
-
 					_this.$_geo_address = results[0].geometry.location;
 
 					_this.$_panorama.setPosition(_this.$_geo_address);
@@ -2923,6 +2953,7 @@ function registerComponents(Vue, prefix) {
 	Vue.component(prefix + 'circle', Circle);
 	Vue.component(prefix + 'rectangle', Rectangle);
 	Vue.component(prefix + 'geocoder', Geocoder);
+	Vue.component(prefix + 'geocoder-event', GeocoderEvent);
 	Vue.component(prefix + 'map', Map);
 	Vue.component(prefix + 'marker', Marker);
 	Vue.component(prefix + 'nearby-places', NearbyPlaces);
@@ -2971,6 +3002,7 @@ if (GlobalVue) {
 exports.Circle = Circle;
 exports.Rectangle = Rectangle;
 exports.Geocoder = Geocoder;
+exports.GeocoderEvent = GeocoderEvent;
 exports.Map = Map;
 exports.Marker = Marker;
 exports.NearbyPlaces = NearbyPlaces;

@@ -5,6 +5,7 @@ import { initErrorHandling } from './utils/error'
 
 import Circle from './components/Circle'
 import Geocoder from './components/Geocoder'
+import GeocoderEvent from './components/GeocoderEvent'
 import Map from './components/Map.vue'
 import Marker from './components/Marker'
 import NearbyPlaces from './components/NearbyPlaces'
@@ -23,6 +24,7 @@ export {
 	Circle,
 	Rectangle,
 	Geocoder,
+	GeocoderEvent,
 	Map,
 	Marker,
 	NearbyPlaces,
@@ -40,6 +42,7 @@ function registerComponents (Vue, prefix) {
 	Vue.component(`${prefix}circle`, Circle)
 	Vue.component(`${prefix}rectangle`, Rectangle)
 	Vue.component(`${prefix}geocoder`, Geocoder)
+	Vue.component(`${prefix}geocoder-event`, GeocoderEvent)
 	Vue.component(`${prefix}map`, Map)
 	Vue.component(`${prefix}marker`, Marker)
 	Vue.component(`${prefix}nearby-places`, NearbyPlaces)
